@@ -6,7 +6,7 @@
       <span class="todo-tag"><span>已完成 {{count}}</span> /全部 {{todos.length}}</span>
     </div>
     <button class="btn btn-danger"
-            @click="clearCompleted">清除已完成任务</button>
+            @click="isClearCompleted">清除已完成任务</button>
   </div>
 </template>
 
@@ -47,9 +47,12 @@ export default defineComponent({
       },
     })
 
+    const isClearCompleted = () => props.clearCompleted
+
     return {
       count,
       isCheckAll,
+      isClearCompleted,
     }
   },
 })
