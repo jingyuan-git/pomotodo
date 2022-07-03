@@ -23,6 +23,8 @@ declare module '@vue/runtime-core' {
     PomoHeader: typeof import('./src/components/pomos/PomoHeader.vue')['default']
     PomoHistory: typeof import('./src/components/dataStatistics/PomoHistory.vue')['default']
     PomoList: typeof import('./src/components/pomos/PomoList.vue')['default']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
     StatChart: typeof import('./src/components/dataStatistics/StatChart.vue')['default']
     Todo: typeof import('./src/components/Todo.vue')['default']
     TodoFooter: typeof import('./src/components/todos/TodoFooter.vue')['default']

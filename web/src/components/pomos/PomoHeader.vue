@@ -79,16 +79,6 @@ export default defineComponent({
       // timer.pause()
     }
 
-    let timer1 = 10
-    let interval1 = setInterval(() => {
-      if (timer1 === 0) {
-        clearInterval(interval1)
-      } else {
-        timer1--
-        console.log(timer.isRunning.value)
-      }
-    }, 1000)
-
     onMounted(() => {
       watchEffect(async () => {
         if (timer.isExpired.value) {
@@ -108,7 +98,7 @@ export default defineComponent({
 
       axios
         .post(
-          'http://localhost:8000/api/v1/pomos/create',
+          import.meta.env.VITE_APP_BASE_URL + '/api/v1/pomos/create',
           JSON.stringify({
             id: pomo.id,
             title: pomo.title,

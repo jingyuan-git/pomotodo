@@ -45,7 +45,7 @@ export default defineComponent({
       const sendPostRequest = async () => {
         try {
           const resp = await axios.post(
-            'http://localhost:8000/api/v1/pomos/list',
+            import.meta.env.VITE_APP_BASE_URL + '/api/v1/pomos/list',
             {},
             {
               headers: {
@@ -67,12 +67,7 @@ export default defineComponent({
       }
 
       sendPostRequest()
-      //TODO:
-      // const resp = await axios
-      //   .post('http://localhost:8000/api/v1/pomos/list', {}, config)
-      //   .then((response: any) => {
-      //     console.log(response.data)
-      //   })
+
       watchEffect(async () => {})
     })
 

@@ -17,9 +17,6 @@ let { analyzeComponent } = storeToRefs(store)
 
 
 <template>
-  <!-- <img alt="Vue logo"
-       src="./assets/logo.png" /> -->
-
   <section class="container">
     <!-- 左容器 -->
     <section class="itemLeft">

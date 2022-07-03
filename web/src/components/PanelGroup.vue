@@ -116,7 +116,7 @@ export default defineComponent({
       const sendPostRequest = async () => {
         try {
           const resp = await axios.post(
-            'http://localhost:8000/api/v1/pomos/count',
+            import.meta.env.VITE_APP_BASE_URL + '/api/v1/pomos/count',
             JSON.stringify({
               // startTime: pomoStartTime.value.toString(),
               // endTime: Date.now().toString(),

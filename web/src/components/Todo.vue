@@ -22,7 +22,6 @@ import Header from '@/components/todos/TodoHeader.vue'
 import List from '@/components/todos/TodoList.vue'
 import Footer from '@/components/todos/TodoFooter.vue'
 import { Todo } from '@/types/todo'
-import { saveTodos, readTodos } from '@/utils/localStorageUtils'
 import axios from 'axios'
 
 export default defineComponent({
@@ -40,7 +39,7 @@ export default defineComponent({
       const sendPostRequest = async () => {
         try {
           const resp = await axios.post(
-            'http://localhost:8000/api/v1/todos/list',
+            import.meta.env.VITE_APP_BASE_URL + '/api/v1/todos/list',
             {},
             {
               headers: {
@@ -71,7 +70,7 @@ export default defineComponent({
       state.todos.unshift(todo)
       axios
         .post(
-          'http://localhost:8000/api/v1/todos/create',
+          import.meta.env.VITE_APP_BASE_URL + '/api/v1/todos/create',
           JSON.stringify({
             id: todo.id,
             title: todo.title,
@@ -94,7 +93,7 @@ export default defineComponent({
       state.todos.splice(index, 1)
       axios
         .post(
-          'http://localhost:8000/api/v1/todos/delete',
+          import.meta.env.VITE_APP_BASE_URL + '/api/v1/todos/delete',
           JSON.stringify({
             id: id,
           }),
@@ -114,7 +113,7 @@ export default defineComponent({
 
       axios
         .post(
-          'http://localhost:8000/api/v1/todos/update',
+          import.meta.env.VITE_APP_BASE_URL + '/api/v1/todos/update',
           JSON.stringify({
             id: todo.id,
             title: todo.title,
@@ -138,7 +137,7 @@ export default defineComponent({
         item.isCompleted = val
         axios
           .post(
-            'http://localhost:8000/api/v1/todos/update',
+            import.meta.env.VITE_APP_BASE_URL + '/api/v1/todos/update',
             JSON.stringify({
               id: item.id,
               title: item.title,
