@@ -14,11 +14,8 @@ const store = useMainStore()
 let { analyzeComponent } = storeToRefs(store)
 </script>
 
-
-
 <template>
   <section class="container">
-    <!-- 左容器 -->
     <section class="itemLeft">
       <PomoItem />
     </section>
@@ -26,11 +23,9 @@ let { analyzeComponent } = storeToRefs(store)
     <section class="itemRight">
       <TodoList />
     </section>
-    <!-- 右容器 -->
-
   </section>
 
-  <section class="summary">
+  <section class="panel">
     <PanelGroup />
 
   </section>
@@ -38,8 +33,6 @@ let { analyzeComponent } = storeToRefs(store)
   <section class="analyze">
     <div v-if="analyzeComponent === 'Stat'">
       <StatChart />
-    </div>
-    <div v-else-if="analyzeComponent === 'B'">
     </div>
     <div v-else-if="analyzeComponent === 'PomoHistory'">
       <PomoHistory />
@@ -64,15 +57,8 @@ let { analyzeComponent } = storeToRefs(store)
 </style>
 
 <style lang="less" >
-// 大容器的样式
 .container {
-  // 最大最小的宽度
-  // min-width: 1200px;
-  // max-width: 2048px;
-  // padding: 0.125rem 0.125rem 0;
-  // background-color: gray;
   display: flex;
-  // 设置左右在页面的份数
   .itemLeft,
   .itemRight {
     flex: 1;

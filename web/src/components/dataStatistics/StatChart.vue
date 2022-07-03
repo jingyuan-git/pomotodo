@@ -7,7 +7,6 @@
 
       </el-col>
     </el-row>
-    <!-- TODO： Best workday Top tags  Best worktime  -->
     <el-row>
       <el-col :span="8">
         <div class="grid-content ep-bg-purple" />
@@ -25,12 +24,11 @@
 
 <script lang="ts">
 import * as echarts from 'echarts'
-import { inject, onMounted, reactive, ref, watch, defineComponent } from 'vue'
-import axios from 'axios'
+import { onMounted, ref, watch, defineComponent } from 'vue'
 import { useMainStore } from '@/stores/index'
 import { storeToRefs } from 'pinia'
 import { isNil } from 'lodash'
-import Slot from '@/components/dataStatistics/dataStatisticSlot.vue'
+import Slot from '@/components/dataStatistics/PomoStatistics.vue'
 
 export default defineComponent({
   setup() {

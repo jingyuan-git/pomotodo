@@ -5,7 +5,6 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    DataStatisticSlot: typeof import('./src/components/dataStatistics/dataStatisticSlot.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElCol: typeof import('element-plus/es')['ElCol']
@@ -23,6 +22,7 @@ declare module '@vue/runtime-core' {
     PomoHeader: typeof import('./src/components/pomos/PomoHeader.vue')['default']
     PomoHistory: typeof import('./src/components/dataStatistics/PomoHistory.vue')['default']
     PomoList: typeof import('./src/components/pomos/PomoList.vue')['default']
+    PomoStatistics: typeof import('./src/components/dataStatistics/PomoStatistics.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     StatChart: typeof import('./src/components/dataStatistics/StatChart.vue')['default']

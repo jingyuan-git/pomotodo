@@ -3,85 +3,33 @@
           class="panel-group">
     <el-col :xs="12"
             :sm="12"
-            :lg="6"
+            :lg="12"
             class="card-panel-col">
       <div class="card-panel"
            @click="handleSetLineChartData('Stat')">
         <div class="card-panel-icon-wrapper icon-people">
-          <img :src="visits">
+          <img :src="user">
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            Stat
+            Pomodoro statistics
           </div>
-          <div class="card-panel-text">
-            Weekly cumulation
-          </div>
-          <CountTo ref="myCount"
-                   :start-val="0"
-                   :end-val="102400"
-                   :duration="2600"
-                   class="card-panel-num" />
         </div>
       </div>
     </el-col>
     <el-col :xs="12"
             :sm="12"
-            :lg="6"
-            class="card-panel-col">
-      <div class="card-panel"
-           @click="handleSetLineChartData('Goal')">
-        <div class="card-panel-icon-wrapper icon-message">
-          <img :src="messages">
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">
-            Goal
-          </div>
-          <CountTo :start-val="0"
-                   :end-val="81212"
-                   :duration="3000"
-                   class="card-panel-num" />
-        </div>
-      </div>
-    </el-col>
-    <el-col :xs="12"
-            :sm="12"
-            :lg="6"
+            :lg="12"
             class="card-panel-col">
       <div class="card-panel"
            @click="handleSetLineChartData('PomoHistory')">
         <div class="card-panel-icon-wrapper icon-money">
-          <img :src="purchases">
+          <img :src="tag">
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            Pomo history
+            Pomodoro history
           </div>
-          <CountTo :start-val="0"
-                   :end-val="9280"
-                   :duration="3200"
-                   class="card-panel-num" />
-        </div>
-      </div>
-    </el-col>
-    <el-col :xs="12"
-            :sm="12"
-            :lg="6"
-            class="card-panel-col">
-      <div class="card-panel"
-           @click="handleSetLineChartData('TodoHistory')">
-        <div class="card-panel-icon-wrapper icon-shopping">
-          <img :src="shoppings">
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">
-            Todo hitory
-          </div>
-          <CountTo :start-val="0"
-                   :end-val="13600"
-                   :duration="3600"
-                   class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -93,10 +41,8 @@ import { useMainStore } from '@/stores/index'
 import { storeToRefs } from 'pinia'
 import { defineComponent, onMounted, ref } from 'vue'
 import { CountTo } from 'vue3-count-to'
-import messages from '@/assets/images/home/messages.png'
-import purchases from '@/assets/images/home/purchases.png'
-import shoppings from '@/assets/images/home/shoppings.png'
-import visits from '@/assets/images/home/visits.png'
+import tag from '@/assets/images/home/tag.png'
+import user from '@/assets/images/home/user.png'
 import axios from 'axios'
 export default defineComponent({
   components: {
@@ -135,7 +81,6 @@ export default defineComponent({
           )
 
           store.pomoTotal = resp.data.data.lists
-          console.log('store.pomoTotal ', store.pomoTotal)
           store.$patch({ pomoTotal: resp.data.data.lists })
           console.log('TTTTTTT_currentValue patch', store.pomoTotal)
         } catch (err) {
@@ -148,11 +93,6 @@ export default defineComponent({
     }
 
     // store.increment()
-
-    const myCount = ref(null)
-    onMounted(() => {
-      console.log((myCount.value as any).value)
-    })
 
     const bgColor = ref('white')
     const myColor = ref('black')
@@ -167,23 +107,13 @@ export default defineComponent({
       }
     }
 
-    // const main = useMainStore()
-
-    // extract specific store properties
-
     return {
       handleSetLineChartData,
-      myCount,
-      messages,
-      purchases,
-      visits,
-      shoppings,
+      tag,
+      user,
       mouseHandler,
       bgColor,
       myColor,
-      // gives access to the whole store in the template
-      // main,
-      // gives access only to specific state or getter
     }
   },
 })

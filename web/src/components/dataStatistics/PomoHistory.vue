@@ -45,8 +45,7 @@ import { useMainStore } from '@/stores/index'
 import { storeToRefs } from 'pinia'
 import { PomoTotal } from '@/types/pomo'
 import dayjs from 'dayjs'
-import Slot from '@/components/dataStatistics/dataStatisticSlot.vue'
-import { isNil } from 'lodash'
+import Slot from '@/components/dataStatistics/PomoStatistics.vue'
 
 export default defineComponent({
   setup() {
@@ -58,26 +57,7 @@ export default defineComponent({
     let { pomoTotal } = storeToRefs(store)
     let { pomoOnePage } = storeToRefs(store)
 
-    console.log('data', data)
-
-    const time = computed(() => (date_example: string) => {
-      return dayjs(date_example).format('HH:mm')
-    })
-
-    watch(
-      pomoTotal,
-      (newValue: any, oldValue: any) => {
-        const a = JSON.parse(JSON.stringify(newValue))
-        store.updatePomo(a)
-        store.currentPomo(1, pageSize.value)
-      },
-      { deep: true }
-    )
-
-    onMounted(() => {
-      // console.log(store.pomoTotal)
-    })
-
+    let total = ref(0)
     let currentPage = ref(1)
     let pageSize = ref(3)
     const handleSizeChange = (val: number) => {
@@ -88,10 +68,25 @@ export default defineComponent({
       store.currentPomo(val, pageSize.value)
     }
 
+    const time = computed(() => (date_example: string) => {
+      return dayjs(date_example).format('HH:mm')
+    })
+
+    watch(
+      pomoTotal,
+      (newPomos: any, oldPomos: any) => {
+        const a = JSON.parse(JSON.stringify(newPomos))
+        store.updatePomo(a)
+        total.value = store.pomoFilter.length
+        store.currentPomo(1, pageSize.value)
+      },
+      { deep: true }
+    )
+
     return {
       ...toRefs(data),
       time,
-      total: store.pomoFilter.length,
+      total,
       listQuery: {
         page: 1,
         limit: 20,

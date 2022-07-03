@@ -1,7 +1,6 @@
 <template>
   <div class="demo-date-picker">
     <div class="block">
-      <!-- <p>Component value: {{ value }}</p> -->
       <el-date-picker v-model="value"
                       type="daterange"
                       start-placeholder="Start date"
@@ -23,7 +22,6 @@ import { inject, onMounted, reactive, ref, watch, defineComponent } from 'vue'
 import axios from 'axios'
 import { useMainStore } from '@/stores/index'
 import { storeToRefs } from 'pinia'
-import { isNil } from 'lodash'
 
 export default defineComponent({
   setup() {
@@ -47,29 +45,6 @@ export default defineComponent({
       },
       { deep: true }
     )
-
-    // onMounted(() => {
-    //   chart = echarts.init(document.getElementById('main') as HTMLDivElement)
-    //   // 调用请求
-    //   chart.setOption({
-    //     // title: {
-    //     //   text: 'ECharts 入门示例',
-    //     // },
-    //     tooltip: {},
-    //     type: 'category',
-    //     xAxis: {
-    //       data: pomoTotal.value.map((v) => v.date),
-    //     },
-    //     yAxis: {},
-    //     series: [
-    //       {
-    //         name: 'number',
-    //         type: 'line',
-    //         data: pomoTotal.value.map((v) => v.number),
-    //       },
-    //     ],
-    //   })
-    // })
 
     return {
       value,
