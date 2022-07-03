@@ -3,10 +3,10 @@
     <div>
       <label><input type="checkbox"
                :isCheckAll="isCheckAll"></label>
-      <span class="todo-tag"><span>已完成 {{count}}</span> /全部 {{todos.length}}</span>
+      <span class="todo-tag"><span>Completed {{count}}</span> /All {{todos.length}}</span>
     </div>
     <button class="btn btn-danger"
-            @click="isClearCompleted">清除已完成任务</button>
+            @click="isClearCompleted">Clear completed todos</button>
   </div>
 </template>
 

@@ -2,7 +2,7 @@
   <div class="header-wrap">
     <input type="text"
            v-model="todoItem"
-           placeholder="输入待完成任务，按回车键添加"
+           placeholder="Enter the tod and press enter to add"
            @keyup.enter="add">
   </div>
 </template>
