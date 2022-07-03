@@ -14,7 +14,7 @@ import { ref, reactive, toRefs, watch } from 'vue'
 import { watchEffect, onMounted, defineComponent } from 'vue'
 import { useTimer } from 'vue-timer-hook'
 import { Pomo } from '@/types/pomo'
-import { savePomos, readPomos } from '@/utils/localStorageUtils'
+import { useMainStore } from '@/stores/index'
 import axios from 'axios'
 
 export default defineComponent({
@@ -35,11 +35,6 @@ export default defineComponent({
     const state = reactive<{ pomos: Pomo[] }>({
       pomos: [],
     })
-    watch(() => state.pomos, savePomos, { deep: true })
-
-    watch(state, (newValue, oldValue) => {
-      console.log('state的值变化了', newValue, oldValue)
-    })
 
     onMounted(() => {
       const sendPostRequest = async () => {
@@ -54,14 +49,9 @@ export default defineComponent({
               responseType: 'text',
             }
           )
-          console.log(resp.data.lists)
-          console.log(resp.data.data)
           console.log('resp.data.data.lists', resp.data.data.lists)
           state.pomos = resp.data.data.lists
-          console.log('resp.data', resp.data, state.pomos)
-          // console.log(resp.data)
         } catch (err) {
-          // Handle Error Here
           console.error(err)
         }
       }
@@ -71,10 +61,10 @@ export default defineComponent({
       watchEffect(async () => {})
     })
 
+    const store = useMainStore()
     const addToPomo = (pomo: Pomo) => {
       state.pomos.unshift(pomo)
-
-      console.log('pomos', state.pomos)
+      store.counts('', '')
     }
     return {
       ...toRefs(state),
