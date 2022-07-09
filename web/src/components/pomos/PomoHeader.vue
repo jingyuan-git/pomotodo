@@ -3,21 +3,17 @@
     <el-button @click="startPomo()">
       <div v-if="isShow">Start Pomo</div>
       <div v-else>
-        <span>{{timer.hours}}</span>:<span>{{timer.minutes}}</span>:<span>{{timer.seconds}}</span>
+        <span>{{ timer.hours }}</span>:<span>{{ timer.minutes }}</span>:<span>{{ timer.seconds }}</span>
       </div>
     </el-button>
   </el-row>
 
   <Dialog v-model="visible">
-    <el-input v-model="pomoTitle"
-              placeholder="当前pomo的名称" />
+    <el-input v-model="pomoTitle" placeholder="当前pomo的名称" />
     <div id="wrap">
       <el-form-item id="wrap">
-        <el-button id="button1"
-                   type="primary"
-                   @click="onSubmit">Create</el-button>
-        <el-button id="button2"
-                   @click="visible = false">Cancel</el-button>
+        <el-button id="button1" type="primary" @click="onSubmit">Create</el-button>
+        <el-button id="button2" @click="visible = false">Cancel</el-button>
       </el-form-item>
     </div>
   </Dialog>
@@ -98,7 +94,7 @@ export default defineComponent({
 
       axios
         .post(
-          import.meta.env.VITE_APP_BASE_URL + '/api/v1/pomos/create',
+          '/api/v1/pomos/create',
           JSON.stringify({
             id: pomo.id,
             title: pomo.title,
@@ -152,6 +148,7 @@ export default defineComponent({
   display: grid;
   place-items: center;
 }
+
 .dialog-body {
   img {
     display: block;
@@ -159,10 +156,12 @@ export default defineComponent({
     height: 200px;
     margin: 0 auto;
   }
-  img + p {
+
+  img+p {
     margin: 30px 0;
     color: #6266f5;
   }
+
   .text-button {
     margin-top: 15px;
   }
@@ -171,15 +170,18 @@ export default defineComponent({
 el-button {
   width: auto;
 }
+
 .wrap {
   display: flex;
 }
+
 #button1,
 #button2 {
   display: inline-block;
   margin-top: 15px;
   width: 100px;
 }
+
 #div1,
 #div2,
 #div3 {

@@ -3,9 +3,7 @@
     <Header :addToPlan='addToPlan'></Header>
     <el-divider />
     <List :todos='todos'></List>
-    <Footer :todos='todos'
-            :clearCompleted='clearCompleted'
-            :checkAll='checkAll' />
+    <Footer :todos='todos' :clearCompleted='clearCompleted' :checkAll='checkAll' />
   </div>
 </template>
 
@@ -39,7 +37,7 @@ export default defineComponent({
       const sendPostRequest = async () => {
         try {
           const resp = await axios.post(
-            import.meta.env.VITE_APP_BASE_URL + '/api/v1/todos/list',
+            '/api/v1/todos/list',
             {},
             {
               headers: {
@@ -70,7 +68,7 @@ export default defineComponent({
       state.todos.unshift(todo)
       axios
         .post(
-          import.meta.env.VITE_APP_BASE_URL + '/api/v1/todos/create',
+          '/api/v1/todos/create',
           JSON.stringify({
             id: todo.id,
             title: todo.title,
@@ -93,7 +91,7 @@ export default defineComponent({
       state.todos.splice(index, 1)
       axios
         .post(
-          import.meta.env.VITE_APP_BASE_URL + '/api/v1/todos/delete',
+          '/api/v1/todos/delete',
           JSON.stringify({
             id: id,
           }),
@@ -113,7 +111,7 @@ export default defineComponent({
 
       axios
         .post(
-          import.meta.env.VITE_APP_BASE_URL + '/api/v1/todos/update',
+          '/api/v1/todos/update',
           JSON.stringify({
             id: todo.id,
             title: todo.title,
@@ -137,7 +135,7 @@ export default defineComponent({
         item.isCompleted = val
         axios
           .post(
-            import.meta.env.VITE_APP_BASE_URL + '/api/v1/todos/update',
+            '/api/v1/todos/update',
             JSON.stringify({
               id: item.id,
               title: item.title,
@@ -191,6 +189,7 @@ export default defineComponent({
   /* border-radius: 5px; */
   /* padding: 20px; */
 }
+
 .todo-wrap h2 {
   text-align: center;
 }

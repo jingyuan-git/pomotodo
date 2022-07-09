@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  pgsql:
+    image: postgres
+    container_name: pgsql
+    volumes:
+      - ./postgre/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgre/db-data/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=api
+    ports:
+      - 5432:5432
+    networks:
+      - backend
+    privileged: true
+    restart: always
+
+  pgadmin4:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    ports:
+      - 5050:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: name@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    restart: always
+    networks:
+      - frontend
+      - backend
+
+  backend:
+    image: nginx-backend:v1.0.1
+    container_name: backend
+    build:
+      context: ./server
+    depends_on:
+      - pgsql
+    networks:
+      - backend
+    restart: always
+
+  frontend:
+    image: nginx-frontend:v1.0.7
+    container_name: frontend
+    build:
+      context: ./web
+    ports:
+      - "8080:8080"
+    networks:
+      - frontend
+      - backend
+    restart: always
+networks:
+  frontend:
+  backend:

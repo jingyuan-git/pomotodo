@@ -21,7 +21,7 @@ export const useMainStore = defineStore({
 	actions: {
 		async counts(filterBegin: String, filterEnd: String) {
 			const resp = await axios.post(
-				import.meta.env.VITE_APP_BASE_URL + '/api/v1/pomos/count',
+				'/api/v1/pomos/count',
 				JSON.stringify({
 					filterBegin: filterBegin,
 					filterEnd: filterEnd,
