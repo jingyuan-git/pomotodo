@@ -40,7 +40,7 @@ func Setup() {
 		panic(err)
 	}
 
-	// Migrate order associated table
+	// Migrate associated table
 	db.AutoMigrate(
 		[]Pomodoro{},
 		[]Todo{},

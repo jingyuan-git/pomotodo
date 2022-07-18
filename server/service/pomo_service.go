@@ -26,10 +26,7 @@ type PomoDto struct {
 	EndTime   string `json:"endTime,omitempty"`
 }
 
-func (a *Pomo) CreatePomo(p PomoDto) error {
-	fmt.Printf("p.StartTime %+v \n", p.StartTime)
-	fmt.Printf("p.EndTime %+v \n", p.EndTime)
-
+func (p *Pomo) CreatePomo() error {
 	startTime, _ := formatTimeStamp(p.StartTime)
 	endTime, _ := formatTimeStamp(p.EndTime)
 
@@ -40,7 +37,6 @@ func (a *Pomo) CreatePomo(p PomoDto) error {
 		EndTime:   endTime,
 		Date:      endTime.Format("2006.01.02"),
 	}
-	fmt.Printf("service %+v/n", pomo)
 	if err := models.CreatePomo(pomo); err != nil {
 		return err
 	}
@@ -52,7 +48,7 @@ func (a *Pomo) GetAll() ([]*models.Pomodoro, error) {
 	aa := make(map[string]interface{})
 	pomos, err := models.GetPomos(aa)
 	if err != nil {
-		log.Default().Printf("fail to list all orders, error: %+v \n", err)
+		log.Default().Printf("fail to list all pomos, error: %+v \n", err)
 		return nil, err
 	}
 
@@ -60,10 +56,9 @@ func (a *Pomo) GetAll() ([]*models.Pomodoro, error) {
 }
 
 func (a *Pomo) CountPomos() ([]*models.CountPomosByDate, error) {
-	fmt.Println("a *Pomo", a.FilterBegin, a.FilterEnd)
 	pomos, err := models.CountPomos(a.getMaps())
 	if err != nil {
-		log.Default().Printf("fail to list all orders, error: %+v \n", err)
+		log.Default().Printf("fail to list all pomos, error: %+v \n", err)
 		return nil, err
 	}
 

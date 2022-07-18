@@ -43,23 +43,12 @@ func (a *Todo) GetAll() ([]*models.Todo, error) {
 	aa := make(map[string]interface{})
 	todos, err := models.GetTodos(aa)
 	if err != nil {
-		log.Default().Printf("fail to list all orders, error: %+v \n", err)
+		log.Default().Printf("fail to list all pomos, error: %+v \n", err)
 		return nil, err
 	}
 
 	return todos, nil
 }
-
-// func (a *Todo) CountTodos() ([]*models.CountTodosByDate, error) {
-// 	fmt.Println("a *Todo", a.FilterBegin, a.FilterEnd)
-// 	todos, err := models.CountTodos(a.getMaps())
-// 	if err != nil {
-// 		log.Default().Printf("fail to list all orders, error: %+v \n", err)
-// 		return nil, err
-// 	}
-
-// 	return todos, nil
-// }
 
 func (a *Todo) DeleteTodo() error {
 	createTime, _ := formatTimeStamp(a.CreatedAt)

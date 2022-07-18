@@ -21,40 +21,32 @@ func CountPomos(c *gin.Context) {
 		form service.Pomo
 	)
 
-	// httpCode, errCode := app.BindAndValid(c, &form)
-	// if errCode != e.SUCCESS {
-	// 	appG.Response(httpCode, errCode, nil)
-	// 	return
-	// }
-
 	if err := c.ShouldBindJSON(&form); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	pomoService := service.Pomo{
+		ID:        form.ID,
+		Title:     form.Title,
+		StartTime: form.StartTime,
+		EndTime:   form.EndTime,
+
 		FilterBegin: form.FilterBegin,
 		FilterEnd:   form.FilterEnd,
 	}
 
 	fmt.Println("pomoService", pomoService, "form", form)
 
-	total, amount, err := pomoService.CountAndTotalAmount()
-	if err != nil {
-		appG.Response(http.StatusInternalServerError, e.ERROR, nil)
-		return
-	}
-
-	orders, err := pomoService.CountPomos()
+	pomos, err := pomoService.CountPomos()
 	if err != nil {
 		appG.Response(http.StatusInternalServerError, e.ERROR, nil)
 		return
 	}
 
 	data := make(map[string]interface{})
-	data["lists"] = orders
-	data["total"] = total
-	data["totalAmount"] = amount
+	data["lists"] = pomos
+	data["total"] = len(pomos)
 
 	appG.Response(http.StatusOK, e.SUCCESS, data)
 }
@@ -71,24 +63,25 @@ func GetPomos(c *gin.Context) {
 		return
 	}
 
-	pomoService := service.Pomo{}
+	pomoService := service.Pomo{
+		ID:        form.ID,
+		Title:     form.Title,
+		StartTime: form.StartTime,
+		EndTime:   form.EndTime,
 
-	total, amount, err := pomoService.CountAndTotalAmount()
-	if err != nil {
-		appG.Response(http.StatusInternalServerError, e.ERROR, nil)
-		return
+		FilterBegin: form.FilterBegin,
+		FilterEnd:   form.FilterEnd,
 	}
 
-	orders, err := pomoService.GetAll()
+	pomos, err := pomoService.GetAll()
 	if err != nil {
 		appG.Response(http.StatusInternalServerError, e.ERROR, nil)
 		return
 	}
 
 	data := make(map[string]interface{})
-	data["lists"] = orders
-	data["total"] = total
-	data["totalAmount"] = amount
+	data["lists"] = pomos
+	data["total"] = len(pomos)
 
 	appG.Response(http.StatusOK, e.SUCCESS, data)
 }
@@ -97,37 +90,28 @@ func CreatePomo(c *gin.Context) {
 	var (
 		appG = app.Gin{C: c}
 	)
-	form := service.PomoDto{}
-	fmt.Println("00000000000")
-	// if err := c.BindJSON(&form); err != nil {
-	// 	fmt.Println(err)
-	// }
-	// fmt.Printf("form %+v \n", form)
+	form := service.Pomo{}
+
 	if err := c.ShouldBindJSON(&form); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	// httpCode, errCode := app.BindAndValid(c, &form)
-	fmt.Println("111111111111111")
-	fmt.Printf("routers  %+v/n", form)
-	// fmt.Println(httpCode, errCode)
-	// if errCode != e.SUCCESS {
-	// 	appG.Response(httpCode, errCode, nil)
-	// 	return
-	// }
 
-	pomoService := service.Pomo{}
+	pomoService := service.Pomo{
+		ID:        form.ID,
+		Title:     form.Title,
+		StartTime: form.StartTime,
+		EndTime:   form.EndTime,
 
-	err := pomoService.CreatePomo(form)
+		FilterBegin: form.FilterBegin,
+		FilterEnd:   form.FilterEnd,
+	}
+
+	err := pomoService.CreatePomo()
 	if err != nil {
 		appG.Response(http.StatusInternalServerError, e.ERROR, nil)
 		return
 	}
 
-	data := make(map[string]interface{})
-	// data["lists"] = orders
-	// data["total"] = total
-	// data["totalAmount"] = amount
-
-	appG.Response(http.StatusOK, e.SUCCESS, data)
+	appG.Response(http.StatusOK, e.SUCCESS, nil)
 }

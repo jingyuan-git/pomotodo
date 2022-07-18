@@ -26,32 +26,10 @@ func CreateTodo(t Todo) error {
 	return nil
 }
 
-// GetOrders gets a list of orders based on paging constraints
+// GetTodos gets a list of todos based on paging constraints
 func GetTodos(maps map[string]interface{}) ([]*Todo, error) {
 	results := []*Todo{}
 	db.Debug().Model([]*Todo{}).Order("created_at desc").Find(&results)
-	return results, nil
-}
-
-// GetOrders gets a list of orders based on paging constraints
-func CountTodos(maps map[string]interface{}) ([]*CountTodosByDate, error) {
-	results := []*CountTodosByDate{}
-	// aa := []*CountTodosByDate{}
-	// db.Debug().Table("pomodoros").Select("date, count(*) as number").Group("date").Order("date").Scan(&results)
-	if maps["filterBegin"] != nil && maps["filterEnd"] != nil {
-		db.Debug().Table("pomodoros").Select("date, count(*) as number").Where("created_at > ? and created_at < ? ", maps["filterBegin"], maps["filterEnd"]).Group("date").Order("date").Scan(&results)
-	} else {
-		db.Debug().Table("pomodoros").Select("date, count(*) as number").Group("date").Order("date").Scan(&results)
-	}
-
-	db.Debug().Migrator().DropTable([]CountTodosByDate{})
-	db.Debug().Table("count_pomos_by_dates").AutoMigrate(&CountTodosByDate{})
-	db.Debug().Table("count_pomos_by_dates").Create(&results)
-
-	db.Debug().Preload("Todos").Find(&results)
-
-	db.Migrator().DropTable("count_pomos_by_dates")
-
 	return results, nil
 }
 
