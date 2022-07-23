@@ -9,19 +9,18 @@
   </el-row>
 
   <Dialog v-model="visible">
-    <el-input v-model="pomoTitle" placeholder="当前pomo的名称" />
+    <el-input v-model="pomoTitle" placeholder="pomodoro name" />
     <div id="wrap">
       <el-form-item id="wrap">
         <el-button id="button1" type="primary" @click="onSubmit">Create</el-button>
-        <el-button id="button2" @click="visible = false">Cancel</el-button>
+        <el-button id="button2" @click="visible = false, isShow = true">Cancel</el-button>
       </el-form-item>
     </div>
   </Dialog>
 </template>
 
 <script lang="ts">
-import moment from 'moment'
-import { ref, reactive, toRefs } from 'vue'
+import { ref } from 'vue'
 import { watchEffect, onMounted, defineComponent } from 'vue'
 import { useTimer } from 'vue-timer-hook'
 import { Pomo } from '@/types/pomo'
@@ -46,8 +45,8 @@ export default defineComponent({
     // let startTime = ref("")
 
     const time = new Date()
-    const timer = useTimer(time.setSeconds(time.getSeconds() + 5), false)
-    // const timer = useTimer(time.setMinutes(time.getMinutes() + 25), false)
+    // const timer = useTimer(time.setSeconds(time.getSeconds() + 5), false)
+    const timer = useTimer(time.setMinutes(time.getMinutes() + 25), false)
     const startPomo = () => {
       //
       if (isShow.value === false) {
@@ -70,7 +69,7 @@ export default defineComponent({
     const reset = () => {
       // Restarts to 5 minutes timer
       const time = new Date()
-      time.setSeconds(time.getSeconds() + 5)
+      time.setSeconds(time.getSeconds() + 1500)
       timer.restart(time.getTime())
       // timer.pause()
     }
@@ -108,12 +107,17 @@ export default defineComponent({
             responseType: 'text',
           }
         )
-        .then((response: any) => console.log(response))
-      props.addToPomo(pomo)
-      visible.value = false
-      isShow.value = true
-      console.log('submit!', props)
+        .then((response: any) => {
+          console.log(response)
+          props.addToPomo(pomo)
+          console.log('submit!', props)
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
     }
+    visible.value = false
+    isShow.value = true
 
     return {
       isShow,
