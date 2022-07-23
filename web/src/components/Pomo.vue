@@ -23,14 +23,6 @@ export default defineComponent({
   setup() {
     let isShow = ref(true)
 
-    const time = new Date()
-    const timer = useTimer(time.setSeconds(time.getSeconds() + 5), false)
-    // const timer = useTimer(time.setMinutes(time.getMinutes() + 25), false)
-    const startPomo = () => {
-      isShow.value = !isShow.value
-      timer.start()
-      console.log('开始')
-    }
 
     const state = reactive<{ pomos: Pomo[] }>({
       pomos: [],
@@ -40,7 +32,7 @@ export default defineComponent({
       const sendPostRequest = async () => {
         try {
           const resp = await axios.post(
-           '/api/v1/pomos/list',
+            '/api/v1/pomos/list',
             {},
             {
               headers: {
@@ -58,7 +50,7 @@ export default defineComponent({
 
       sendPostRequest()
 
-      watchEffect(async () => {})
+      watchEffect(async () => { })
     })
 
     const store = useMainStore()
@@ -69,8 +61,6 @@ export default defineComponent({
     return {
       ...toRefs(state),
       isShow,
-      timer,
-      startPomo,
       addToPomo,
     }
   },

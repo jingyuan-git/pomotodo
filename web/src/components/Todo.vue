@@ -28,12 +28,7 @@ export default defineComponent({
     const state = reactive<{ todos: Todo[] }>({
       todos: [],
     })
-    //界面加载完毕后再读取数据
     onMounted(() => {
-      // setTimeout(() => {
-      //   state.todos = readTodos()
-      // }, 1000)
-
       const sendPostRequest = async () => {
         try {
           const resp = await axios.post(
@@ -51,19 +46,15 @@ export default defineComponent({
           console.log('todo resp.data.data.lists', resp.data.data.lists)
           state.todos = resp.data.data.lists
           console.log('resp.data', resp.data, state.todos)
-          // console.log(resp.data)
         } catch (err) {
-          // Handle Error Here
           console.error(err)
         }
       }
 
       sendPostRequest()
     })
-    // value=>saveTodos(value)缩写
-    // watch(() => state.todos, saveTodos, { deep: true })
 
-    // 用于head组件添加数据
+    // used to add data to the head component
     const addToPlan = (todo: Todo) => {
       state.todos.unshift(todo)
       axios
@@ -163,11 +154,10 @@ export default defineComponent({
     provide('delTodo', delTodo)
     provide('updateState', updateState)
     return {
-      // 将state中的所有属性转换为ref对象 ，用的时候直接使用属性名称即可
       ...toRefs(state),
-      // 给header组件的添加方法
+      // add method to header component
       addToPlan,
-      // 给footer组件的全选方法
+      // add checkAll method for footer component
       checkAll,
       clearCompleted,
     }
