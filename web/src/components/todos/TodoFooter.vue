@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import { Todo } from '../../types/todo'
+import { Todo } from '@/types/todo'
 export default defineComponent({
   name: 'Footer',
   props: {
@@ -36,13 +36,11 @@ export default defineComponent({
         0
       )
     })
-    // 全选是否为true
     const isCheckAll = computed({
       get() {
         return count.value > 0 && count.value === props.todos.length
       },
       set(val) {
-        //调用父组件的方法去修改全选状态
         props.checkAll(val)
       },
     })

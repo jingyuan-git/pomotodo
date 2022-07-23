@@ -30,8 +30,6 @@ export default defineComponent({
         createdAt: Date.now().toString(),
         isCompleted: false,
       }
-      // setup中不能直接调用props中的内容
-      // 因此此处用到setup的props参数
       props.addToPlan(todo)
       todoItem.value = ''
     }

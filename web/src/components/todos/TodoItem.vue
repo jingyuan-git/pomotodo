@@ -1,8 +1,4 @@
 <template>
-  <!--
-        此处样式我使用css hover来做
-        视频中老师用到的两个方法 @mouseenter @mouseleave分别为鼠标进入和离开的回调
-    -->
   <li class="todo-item">
     <div>
       <input type="checkbox"
@@ -16,13 +12,11 @@
 
 <script lang="ts">
 import { defineComponent, reactive, inject, computed } from 'vue'
-// 引入接口
 import { Todo } from '@/types/todo'
 export default defineComponent({
   name: 'ListItem',
   props: {
     todoitem: {
-      //函数返回的是Todo类型
       type: Object as () => Todo,
       required: true,
     },
@@ -31,7 +25,6 @@ export default defineComponent({
     },
   },
   setup(props, context) {
-    // 当复选框选中时，所选事件下标索引将添加到selectedItemList中
     let selectedItemList = reactive([])
     if (window.sessionStorage.getItem('selectedItemList')) {
       selectedItemList = JSON.parse(

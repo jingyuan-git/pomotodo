@@ -24,7 +24,7 @@ export default defineComponent({
     watch(
       props.pomos,
       (newValue: Pomo[], oldValue: Pomo[]) => {
-        console.log('pomos变化了', newValue, oldValue)
+        console.log('pomos is change', newValue, oldValue)
       },
       { deep: true }
     )

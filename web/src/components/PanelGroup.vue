@@ -82,7 +82,7 @@ export default defineComponent({
 
           store.pomoTotal = resp.data.data.lists
           store.$patch({ pomoTotal: resp.data.data.lists })
-          console.log('TTTTTTT_currentValue patch', store.pomoTotal)
+          console.log('currentValue patch', store.pomoTotal)
         } catch (err) {
           // Handle Error Here
           console.error(err)

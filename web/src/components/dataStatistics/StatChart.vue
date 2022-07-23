@@ -32,26 +32,10 @@ import Slot from '@/components/dataStatistics/PomoStatistics.vue'
 
 export default defineComponent({
   setup() {
-    const value = ref('')
-    const defaultTime = ref([
-      new Date(2000, 1, 1, 0, 0, 0),
-      new Date(2000, 2, 1, 23, 59, 59),
-    ])
     const store = useMainStore()
 
     let { pomoTotal } = storeToRefs(store)
     let chart: echarts.ECharts | null = null
-    watch(
-      value,
-      (newValue: any, oldValue: any) => {
-        console.log('value变化了', newValue, oldValue)
-        store.counts(
-          newValue[0].valueOf().toString(),
-          newValue[1].valueOf().toString()
-        )
-      },
-      { deep: true }
-    )
 
     watch(
       pomoTotal,
@@ -80,11 +64,7 @@ export default defineComponent({
 
     onMounted(() => {
       chart = echarts.init(document.getElementById('main') as HTMLDivElement)
-      // 调用请求
       chart.setOption({
-        // title: {
-        //   text: 'ECharts 入门示例',
-        // },
         tooltip: {},
         type: 'category',
         xAxis: {
@@ -100,11 +80,6 @@ export default defineComponent({
         ],
       })
     })
-
-    return {
-      value,
-      defaultTime,
-    }
   },
   components: {
     Slot,

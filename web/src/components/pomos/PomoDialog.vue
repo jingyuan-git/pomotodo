@@ -3,11 +3,9 @@
        :class="{ 'is-show': visible }"
        :style="display ? 'display: none' : ''">
 
-    <!-- 不透明遮罩 -->
     <div class="dialog-modal"
          @click.self="closeDialog"></div>
 
-    <!-- 主体 -->
     <div class="dialog-main">
 
       <div class="dialog-head">
@@ -15,7 +13,7 @@
                 @click="closeDialog">x</button>
       </div>
 
-      <!-- 内容区 -->
+      <!-- content -->
       <div class="dialog-body">
         <slot></slot>
       </div>
@@ -37,7 +35,7 @@ export default defineComponent({
     const display = ref(true)
     let timer = 0
 
-    // 关闭弹窗
+    // close dialog
     const closeDialog = () => {
       clearTimeout(timer)
       visible.value = false

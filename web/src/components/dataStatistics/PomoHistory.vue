@@ -53,7 +53,7 @@ export default defineComponent({
       pomos: [],
     })
     const store = useMainStore()
-    console.log('TTTTTTT', store.pomoTotal)
+    console.log('total pomodoros', store.pomoTotal)
     let { pomoTotal } = storeToRefs(store)
     let { pomoOnePage } = storeToRefs(store)
 
