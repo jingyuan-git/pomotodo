@@ -56,7 +56,6 @@ export default defineComponent({
 
     // used to add data to the head component
     const addToPlan = (todo: Todo) => {
-      state.todos.unshift(todo)
       axios
         .post(
           '/api/v1/todos/create',
@@ -73,13 +72,18 @@ export default defineComponent({
             responseType: 'text',
           }
         )
-        .then((response: any) => console.log(response))
-
-      console.log('addTodo!', todo)
+        .then((response: any) => {
+          console.log(response)
+          state.todos.unshift(todo)
+          console.log('addTodo!', todo)
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
     }
+
     const delTodo: Function = (id: string, index: number) => {
       // todo:
-      state.todos.splice(index, 1)
       axios
         .post(
           '/api/v1/todos/delete',
@@ -93,13 +97,18 @@ export default defineComponent({
             responseType: 'text',
           }
         )
-        .then((response: any) => console.log(response))
+        .then((response: any) => {
+          console.log(response)
+          state.todos.splice(index, 1)
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
 
       console.log('delTodo!', state, id)
     }
-    const updateState = (todo: Todo, val: boolean) => {
-      todo.isCompleted = val
 
+    const updateState = (todo: Todo, val: boolean) => {
       axios
         .post(
           '/api/v1/todos/update',
@@ -116,14 +125,19 @@ export default defineComponent({
             responseType: 'text',
           }
         )
-        .then((response: any) => console.log(response))
+        .then((response: any) => {
+          console.log(response)
+          todo.isCompleted = val
+          console.log('update Todo!', todo)
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
 
-      console.log('update Todo!', todo)
       console.log(todo)
     }
     const checkAll = (val: boolean) => {
       state.todos.forEach((item) => {
-        item.isCompleted = val
         axios
           .post(
             '/api/v1/todos/update',
@@ -140,7 +154,13 @@ export default defineComponent({
               responseType: 'text',
             }
           )
-          .then((response: any) => console.log(response))
+          .then((response: any) => {
+            console.log(response)
+            item.isCompleted = val
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
       })
     }
     const clearCompleted = () => {

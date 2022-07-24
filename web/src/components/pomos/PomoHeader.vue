@@ -1,5 +1,5 @@
 <template>
-  <el-row class="header-wrap">
+  <el-row>
     <el-button @click="startPomo()">
       <div v-if="isShow">Start Pomo</div>
       <div v-else>
@@ -115,9 +115,9 @@ export default defineComponent({
         .catch(function (error) {
           console.log(error);
         })
+      isShow.value = true
+      visible.value = false
     }
-    visible.value = false
-    isShow.value = true
 
     return {
       isShow,
@@ -135,15 +135,6 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-.header-wrap input {
-  width: 100%;
-  padding: 5px;
-  border-radius: 5px;
-  outline: none;
-  border: 1px solid lightblue;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-}
-
 .el-button {
   width: 100%;
 }

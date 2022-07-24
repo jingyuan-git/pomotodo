@@ -1,9 +1,6 @@
 <template>
-  <div class="header-wrap">
-    <input type="text"
-           v-model="todoItem"
-           placeholder="Enter the tod and press enter to add"
-           @keyup.enter="add">
+  <div>
+    <el-input type="text" v-model="todoItem" placeholder="Enter the todo and press enter to add" @keyup.enter="add" />
   </div>
 </template>
 
@@ -42,12 +39,4 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.header-wrap input {
-  width: 100%;
-  padding: 5px;
-  border-radius: 5px;
-  outline: none;
-  border: 1px solid lightblue;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-}
 </style>
