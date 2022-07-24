@@ -8,12 +8,12 @@
     </el-button>
   </el-row>
 
-  <Dialog v-model="visible">
+  <Dialog v-model="dialogVisible">
     <el-input v-model="pomoTitle" placeholder="pomodoro name" />
     <div id="wrap">
       <el-form-item id="wrap">
         <el-button id="button1" type="primary" @click="onSubmit">Create</el-button>
-        <el-button id="button2" @click="visible = false, isShow = true">Cancel</el-button>
+        <el-button id="button2" @click="dialogVisible = false, isShow = true">Cancel</el-button>
       </el-form-item>
     </div>
   </Dialog>
@@ -39,35 +39,28 @@ export default defineComponent({
   },
   setup(props) {
     let isShow = ref(true)
-    let visible = ref(false)
+    let dialogVisible = ref(false)
     let pomoStartTime = ref(0)
     let pomoTitle = ref('')
-    // let startTime = ref("")
 
     const time = new Date()
-    // const timer = useTimer(time.setSeconds(time.getSeconds() + 5), false)
     const timer = useTimer(time.setMinutes(time.getMinutes() + 25), false)
     const startPomo = () => {
-      //
+      // 
       if (isShow.value === false) {
         if (timer.isRunning) {
-          visible.value = true
-          console.log('任在运行', visible)
+          dialogVisible.value = true
         }
-
         timer.pause()
-        console.log('结束本次番茄钟')
       } else {
         isShow.value = !isShow.value
         reset()
-
         pomoStartTime.value = Date.now()
-        console.log('开始', Date.now())
       }
     }
 
     const reset = () => {
-      // Restarts to 5 minutes timer
+      // Restarts to 25 minutes timer
       const time = new Date()
       time.setSeconds(time.getSeconds() + 1500)
       timer.restart(time.getTime())
@@ -77,7 +70,7 @@ export default defineComponent({
     onMounted(() => {
       watchEffect(async () => {
         if (timer.isExpired.value) {
-          visible.value = true
+          dialogVisible.value = true
           timer.pause()
         }
       })
@@ -116,7 +109,7 @@ export default defineComponent({
           console.log(error);
         })
       isShow.value = true
-      visible.value = false
+      dialogVisible.value = false
     }
 
     return {
@@ -124,7 +117,7 @@ export default defineComponent({
       timer,
       startPomo,
       onSubmit,
-      visible,
+      dialogVisible,
       pomoTitle,
     }
   },

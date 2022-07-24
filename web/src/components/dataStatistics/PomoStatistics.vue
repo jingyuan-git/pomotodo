@@ -37,7 +37,7 @@ export default defineComponent({
     watch(
       value,
       (newValue: any, oldValue: any) => {
-        console.log('value变化了', newValue, oldValue)
+        console.log('value has changed', newValue, oldValue)
         store.counts(
           newValue[0].valueOf().toString(),
           newValue[1].valueOf().toString()

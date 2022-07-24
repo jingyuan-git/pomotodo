@@ -6,7 +6,7 @@
       <span>{{todoitem.title}}</span>
     </div>
     <button class="delBtn"
-            @click="del(todoitem.id)">删除</button>
+            @click="del(todoitem.id)"> delete </button>
   </li>
 </template>
 
@@ -36,7 +36,7 @@ export default defineComponent({
     const updateState: Function | undefined = inject('updateState')
 
     const del = (id: String | undefined) => {
-      if (window.confirm('确认删除吗？')) {
+      if (window.confirm('Confirm delete?')) {
         if (typeof delTodo === 'function') delTodo(id, props.index)
       }
     }

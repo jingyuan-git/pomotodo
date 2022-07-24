@@ -28,7 +28,6 @@
                      @current-change="handleCurrentChange" />
     </div>
   </Slot>
-
 </template>
 
 <script lang="ts">

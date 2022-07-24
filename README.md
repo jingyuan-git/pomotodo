@@ -144,6 +144,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
     ```
     docker-compose up
+    ## to rebuild this image
+    docker-compose up --build
+    
     docker-compose down
     ```
 
