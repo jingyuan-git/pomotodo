@@ -4,7 +4,7 @@
     
    - The pomotodo project based on vue and gin, which separates the front and rear of the full stack. Pomotodo contains full workflow management. Stay focused at work and get more done with Pomotodo.
 
-## 2. How to run
+## 2. How to Run in Development Environment
 
 -  Required
 
@@ -94,28 +94,58 @@
     ```
 
 - Project setup
+
     ```
     cd web
-    yarn install
+    npm install
     ```
 
 - Compiles and hot-reloads for development
+
     ```
-    yarn serve
+    npm run dev
     ```
 
 - Compiles and minifies for production
     ```
-    yarn build
+    npm run build
     ```
 
-- Lints and fixes files
-    ```
-    yarn lint
-    ```
 
 - Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-# 3. Project Display
+# 3. Deployment in Production Environment
+
+- server config
+
+    ```bash
+    You should modify `server/conf/app.ini`
+
+    [server]
+    ; debug or release
+    RunMode = debug
+    ; Host = localhost
+    HttpPort = 8000
+    ...
+
+    [database]
+    Type = postgres
+    User = postgres
+    Password = root
+    Host = pgsql
+    Port = 5432
+    Name = api
+    TimeZone = Australia/Melbourne
+    DataPath = ../data/
+    ...
+    ```
+- up or down docker container
+
+    ```
+    docker-compose up
+    docker-compose down
+    ```
+
+# 4. Project Display
 
