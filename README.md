@@ -151,4 +151,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     ```
 
 # 4. Project Display
-
+- [Web Address](http://101.200.132.209:8080/)
+- [PG Admin Address](http://101.200.132.209:5050/)
