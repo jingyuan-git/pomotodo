@@ -1,8 +1,9 @@
 <template>
   <li class="todo-item">
     <div>
-      <input type="checkbox"
-             :isCompleted="isCompleted">
+      <input id="todo"
+             type="checkbox"
+             v-model="isCompleted">
       <span>{{todoitem.title}}</span>
     </div>
     <button class="delBtn"
@@ -42,11 +43,9 @@ export default defineComponent({
     }
     const isCompleted = computed({
       get() {
-        console.log('is completed get', props.todoitem.isCompleted)
         return props.todoitem.isCompleted
       },
       set(val) {
-        console.log('is completed set', props.todoitem.isCompleted)
         if (typeof updateState === 'function') updateState(props.todoitem, val)
       },
     })
