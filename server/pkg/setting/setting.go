@@ -31,6 +31,8 @@ type Database struct {
 	User     string
 	Password string
 	Host     string
+	DevHost  string
+	ProdHost string
 	Port     string
 	Name     string
 	TimeZone string
@@ -41,7 +43,7 @@ var DatabaseSetting = &Database{}
 
 var cfg *ini.File
 
-func Setup() {
+func Setup(env *string) {
 	var err error
 	str, _ := os.Getwd()
 	fmt.Println(str)
@@ -52,6 +54,20 @@ func Setup() {
 
 	mapTo("server", ServerSetting)
 	mapTo("database", DatabaseSetting)
+
+	// set the host of database based on the node environment
+	devHost, err := cfg.Section("database").GetKey("DevHost")
+	prodHost, err := cfg.Section("database").GetKey("ProdHost")
+
+	if *env == "dev" {
+		ServerSetting.Host = devHost.String()
+		DatabaseSetting.Host = devHost.String()
+	}
+	if *env == "prod" {
+		ServerSetting.Host = prodHost.String()
+		DatabaseSetting.Host = prodHost.String()
+	}
+
 	log.Printf("the settings are successfully loaded")
 }
 
