@@ -60,11 +60,9 @@ func Setup(env *string) {
 	prodHost, err := cfg.Section("database").GetKey("ProdHost")
 
 	if *env == "dev" {
-		ServerSetting.Host = devHost.String()
 		DatabaseSetting.Host = devHost.String()
 	}
 	if *env == "prod" {
-		ServerSetting.Host = prodHost.String()
 		DatabaseSetting.Host = prodHost.String()
 	}
 
