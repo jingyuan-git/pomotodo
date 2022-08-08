@@ -3,8 +3,7 @@
     <el-row>
       <el-col :span="24">
         <div class="grid-content ep-bg-purple-dark"
-             id="main"> </div>
-
+             id="echart"> </div>
       </el-col>
     </el-row>
     <el-row>
@@ -24,7 +23,7 @@
 
 <script lang="ts">
 import * as echarts from 'echarts'
-import { onMounted, ref, watch, defineComponent } from 'vue'
+import { onMounted, onUnmounted, watch, defineComponent } from 'vue'
 import { useMainStore } from '@/stores/index'
 import { storeToRefs } from 'pinia'
 import { isNil } from 'lodash'
@@ -63,7 +62,7 @@ export default defineComponent({
     )
 
     onMounted(() => {
-      chart = echarts.init(document.getElementById('main') as HTMLDivElement)
+      chart = echarts.init(document.getElementById('echart') as HTMLDivElement)
       chart.setOption({
         tooltip: {},
         type: 'category',
@@ -79,6 +78,10 @@ export default defineComponent({
           },
         ],
       })
+    })
+
+    onUnmounted(() => {
+      chart?.dispose()
     })
   },
   components: {
