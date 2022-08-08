@@ -60,7 +60,6 @@ export default defineComponent({
 
 <style scoped>
 .todo-item {
-  border: 1px solid lightblue;
   list-style: none;
   width: 100%;
   padding: 5px;
