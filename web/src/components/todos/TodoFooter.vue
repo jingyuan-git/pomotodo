@@ -2,7 +2,7 @@
   <div class="todo-footer">
     <div>
       <label><input type="checkbox"
-               :isCheckAll="isCheckAll"></label>
+               v-model="isCheckAll"></label>
       <span class="todo-tag"><span>Completed {{count}}</span> /All {{todos.length}}</span>
     </div>
     <button class="btn btn-danger"
@@ -45,7 +45,9 @@ export default defineComponent({
       },
     })
 
-    const isClearCompleted = () => props.clearCompleted
+    const isClearCompleted = () => {
+      props.clearCompleted()
+    }
 
     return {
       count,

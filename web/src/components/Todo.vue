@@ -3,7 +3,9 @@
     <Header :addToPlan='addToPlan'></Header>
     <el-divider />
     <List :todos='todos'></List>
-    <Footer :todos='todos' :clearCompleted='clearCompleted' :checkAll='checkAll' />
+    <Footer :todos='todos'
+            :clearCompleted='clearCompleted'
+            :checkAll='checkAll' />
   </div>
 </template>
 
@@ -41,8 +43,6 @@ export default defineComponent({
               responseType: 'text',
             }
           )
-          console.log(resp.data.lists)
-          console.log(resp.data.data)
           console.log('todo resp.data.data.lists', resp.data.data.lists)
           state.todos = resp.data.data.lists
           console.log('resp.data', resp.data, state.todos)
@@ -78,7 +78,7 @@ export default defineComponent({
           console.log('addTodo!', todo)
         })
         .catch(function (error) {
-          console.log(error);
+          console.log(error)
         })
     }
 
@@ -102,7 +102,7 @@ export default defineComponent({
           state.todos.splice(index, 1)
         })
         .catch(function (error) {
-          console.log(error);
+          console.log(error)
         })
 
       console.log('delTodo!', state, id)
@@ -131,7 +131,7 @@ export default defineComponent({
           console.log('update Todo!', todo)
         })
         .catch(function (error) {
-          console.log(error);
+          console.log(error)
         })
 
       console.log(todo)
@@ -159,11 +159,12 @@ export default defineComponent({
             item.isCompleted = val
           })
           .catch(function (error) {
-            console.log(error);
+            console.log(error)
           })
       })
     }
     const clearCompleted = () => {
+      console.log('clearCompleted', clearCompleted)
       state.todos = state.todos.filter((item, index) => {
         if (item.isCompleted) {
           return false

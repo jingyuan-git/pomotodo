@@ -55,9 +55,11 @@ export default defineComponent({
     console.log(store.pomoTotal)
 
     const handleSetLineChartData = (type: string) => {
-      // emit('handle-set-line-chart-data', type)
-      store.$patch({ analyzeComponent: type })
-      console.log(store.analyzeComponent)
+      if (store.analyzeComponent !== '' && store.analyzeComponent === type) {
+        store.$patch({ analyzeComponent: '' })
+      } else {
+        store.$patch({ analyzeComponent: type })
+      }
 
       const sendPostRequest = async () => {
         try {
@@ -75,7 +77,7 @@ export default defineComponent({
             }
           )
           console.log(
-            'resp.data.data.lists',
+            'data.lists',
             resp.data.data.lists,
             store.pomoTotal.map((v) => v.date)
           )
