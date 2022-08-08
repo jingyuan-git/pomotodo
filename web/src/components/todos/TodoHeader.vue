@@ -1,11 +1,14 @@
 <template>
   <div>
-    <el-input type="text" v-model="todoItem" placeholder="Enter the todo and press enter to add" @keyup.enter="add" />
+    <el-input type="text"
+              v-model="todoItem"
+              placeholder="Input a new todo and press enter to add"
+              @keyup.enter="add" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { Todo } from '@/types/todo'
 import { nanoid } from 'nanoid'
 export default defineComponent({
