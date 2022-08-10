@@ -62,7 +62,7 @@
     go build -o server main.go (windows the compile command is go build -o server.exe main.go )
 
     # Run binary
-    ./server (windows The run command is server.exe)
+    ./server --env dev (windows The run command is server.exe --env dev)
     ```
 
 - Project information and existing API
@@ -151,4 +151,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     ```
 
 # 4. Project Display
-
+- [Web Address](http://101.200.132.209:8080/)
+- [PG Admin Address](http://101.200.132.209:5050/) (DEFAULT_EMAIL: name@example.com DEFAULT_PASSWORD: admin)
